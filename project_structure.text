@@ -1,0 +1,22 @@
+- .babelrc
+- .editorconfig
+- .gitignore
+- components
+  - NuxtLogo.vue
+  - Tutorial.vue
+- jest.config.js
+- nuxt.config.js
+- package-lock.json
+- package.json
+- pages
+  - index.vue
+- plugins
+  - element-ui.js
+- README.md
+- static
+  - favicon.ico
+- store
+  - README.md
+- test
+  - NuxtLogo.spec.js
+- tsconfig.json
