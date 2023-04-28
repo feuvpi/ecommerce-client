@@ -1,6 +1,6 @@
 interface CartProduct {
-    id: number,
-    productName: string,
+    _id: String,
+    name: string,
     image_url: string,
     price: number,
     stock: number,
@@ -32,17 +32,20 @@ const state = (): CartState => ({
 const mutations = {
     // Add product to cart or increment its quantity if it already exists in the cart
     'ADD_TO_CART' (state: CartState, payload: CartProduct) {
-        const isInCart = state.cart.find(product => product.id == payload.id)
+        console.log("addcart payload:")
+        console.log(payload._id)
+        const isInCart = state.cart.find(product => product._id == payload._id)
+        console.log(state.cart);
         if (isInCart) {
             state.cart.map(product => {
-                if (product.id == payload.id) {
+                if (product._id == payload._id) {
                     product.quantity++
                 }
             })
         } else {
             state.cart = [...state.cart, {
-                id: payload.id,
-                productName: payload.productName,
+                _id: payload._id,
+                name: payload.name,
                 image_url: payload.image_url,
                 price: payload.price,
                 stock: payload.stock,
@@ -58,12 +61,12 @@ const mutations = {
     'REMOVE_FROM_CART' (state: CartState, payload: CartProduct) {
         if (payload.quantity > 1) {
             state.cart.map(product => {
-                if (product.id == payload.id) {
+                if (product._id == payload._id) {
                     product.quantity--
                 }
             })
         } else {
-            const id = state.cart.findIndex(product => product.id == payload.id)
+            const id = state.cart.findIndex(product => product._id == payload._id)
             state.cart.splice(id, 1)
         }
         // Update total amount and quantity of items in the cart
@@ -75,6 +78,7 @@ const mutations = {
 
 const actions = {
     addToCart({ commit }: { commit: Function }, payload: CartProduct) {
+        console.log(payload)
         commit('ADD_TO_CART', payload)
     },
     removeFromCart({ commit }: { commit: Function }, payload: CartProduct) {

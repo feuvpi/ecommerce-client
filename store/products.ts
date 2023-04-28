@@ -4,11 +4,10 @@ const apiURL = 'http://localhost:3001';
 
 // Define the shape of the product object
 interface Product {
-  id: number;
+  _id: String;
   name: string;
   price: number;
   stock: number;
-  favorite: number;
 }
 
 // Define the shape of the state object
@@ -24,42 +23,44 @@ let count = 0;
 
 const mutations = {
   FETCH_PRODUCTS(state: State, payload: Product[]) {
+    console.log(payload)
     state.products = [...state.products, ...payload];
-    count += 10;
+    console.log("products:");
+    console.log(state.products)
   },
-  FETCH_FAVORITE_PRODUCTS(state: State, payload: Product[]) {
-    state.products = payload;
-    count = 0;
-  },
-  UPDATE_FAVORITE_PRODUCT(state: State, payload: Product) {
-    const newFavorite = payload.favorite === 0 ? 1 : 0;
-    axios
-      .patch(apiURL + `/products/${payload.id}`, { favorite: newFavorite })
-      .catch((err) => console.log(err));
-    state.products.map((product) => {
-      if (product.id === payload.id) {
-        product.favorite = newFavorite;
-      }
-    });
-  },
+  // FETCH_FAVORITE_PRODUCTS(state: State, payload: Product[]) {
+  //   state.products = payload;
+  //   count = 0;
+  // },
+  // UPDATE_FAVORITE_PRODUCT(state: State, payload: Product) {
+  //   const newFavorite = payload.favorite === 0 ? 1 : 0;
+  //   axios
+  //     .patch(apiURL + `/products/${payload.id}`, { favorite: newFavorite })
+  //     .catch((err) => console.log(err));
+  //   state.products.map((product) => {
+  //     if (product.id === payload.id) {
+  //       //product.favorite = newFavorite;
+  //     }
+  //   });
+  // },
   TAKE_FROM_STOCK(state: State, payload: Product) {
     state.products.map((product) => {
-      if (product.id === payload.id) {
+      if (product._id === payload._id) {
         product.stock--;
       }
     });
     axios
-      .patch(apiURL + `/products/${payload.id}`, { stock: payload.stock - 1 })
+      .patch(apiURL + `/products/${payload._id}`, { stock: payload.stock - 1 })
       .catch((err) => console.log(err));
   },
   ADD_TO_STOCK(state: State, payload: Product) {
     state.products.map((product) => {
-      if (product.id === payload.id) {
+      if (product._id === payload._id) {
         product.stock++;
       }
     });
     axios
-      .patch(apiURL + `/grocery/${payload.id}`, { stock: payload.stock + 1 })
+      .patch(apiURL + `/grocery/${payload._id}`, { stock: payload.stock + 1 })
       .catch((err) => console.log(err));
   },
 };
@@ -67,12 +68,14 @@ const mutations = {
 const actions = {
   fetchProducts({ commit }: { commit: Function }) {
     axios.get(apiURL + '/products').then((res) => {
+      console.log("resposta do axios:")
+      console.log(res)
       commit('FETCH_PRODUCTS', res.data.slice(count, count + 10));
     });
   },
   updateFavoriteProduct({ commit }: { commit: Function }, product: Product) {
     axios
-      .get(apiURL + `/products/${product.id}`)
+      .get(apiURL + `/products/${product._id}`)
       .then((res) => {
         commit('UPDATE_FAVORITE_PRODUCT', res.data);
       })
