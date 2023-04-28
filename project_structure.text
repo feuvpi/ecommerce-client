@@ -1,21 +1,74 @@
 - .babelrc
 - .editorconfig
 - .gitignore
+- .nuxt
+  - App.js
+  - auth
+    - auth.js
+    - middleware.js
+    - plugin.js
+    - schemes
+      - local.js
+    - storage.js
+    - utilities.js
+  - axios.js
+  - client.js
+  - components
+    - index.js
+    - nuxt-build-indicator.vue
+    - nuxt-child.js
+    - nuxt-error.vue
+    - nuxt-link.client.js
+    - nuxt-link.server.js
+    - nuxt-loading.vue
+    - nuxt.js
+    - plugin.js
+    - readme.md
+  - empty.js
+  - index.js
+  - jsonp.js
+  - layouts
+    - default.vue
+  - loading.html
+  - middleware.js
+  - mixins
+    - fetch.client.js
+    - fetch.server.js
+  - router.js
+  - router.scrollBehavior.js
+  - routes.json
+  - server.js
+  - store.js
+  - utils.js
+  - vetur
+    - tags.json
+  - views
+    - app.template.html
+    - error.html
 - components
+  - navbar.vue
+  - Notification.vue
   - NuxtLogo.vue
-  - Tutorial.vue
 - jest.config.js
 - nuxt.config.js
 - package-lock.json
 - package.json
 - pages
+  - carrinho
+    - cart.vue
+    - index.vue
   - index.vue
-- plugins
-  - element-ui.js
+  - Login.vue
+  - products
+    - index.vue
+    - product.vue
+  - Register.vue
 - README.md
 - static
   - favicon.ico
 - store
+  - cart.ts
+  - products.ts
   - README.md
 - test
   - NuxtLogo.spec.js

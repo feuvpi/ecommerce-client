@@ -1,4 +1,4 @@
-# ecommerce-frontend
+# ecommerce-client-nuxt
 
 ## Build Setup
 
