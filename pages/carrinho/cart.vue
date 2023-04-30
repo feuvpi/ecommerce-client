@@ -1,5 +1,6 @@
 <template>
-    <div class="flex-row place-items-center place-content-center justify-center justify-items-center flex">
+
+        <div class="flex-row place-items-center place-content-center justify-center justify-items-center flex">
         <div class="container max-w-sm w-full flex mb-4 place-content-center ">
             <figure class="object-fill w-1/2 shadow-lg">
             <img class="w-full rounded" :src="this.imageUrl" alt="Img" />
@@ -18,6 +19,9 @@
 
         </div>
     </div>
+
+
+    
 </template>
 
 <script>
